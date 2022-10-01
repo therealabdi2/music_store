@@ -1,9 +1,12 @@
-import React from "react";
+import { FaTimes } from "react-icons/fa";
 
-const Song = ({ song }) => {
+const Song = ({ song, onDelete }) => {
     return (
         <div className="song">
-            <h3>{song.title}</h3>
+            <h3>
+                {song.title}
+                <FaTimes style={{ color: "#ff726f", cursor: "pointer" }} onClick={onDelete} />
+            </h3>
             <p>{song.artist}</p>
         </div>
     );

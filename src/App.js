@@ -41,10 +41,15 @@ function App() {
         },
     ]);
 
+    // Delete song
+    const deleteSong = (id) => {
+        setSongs(songs.filter((song) => song.id !== id)); // filter out the song with the id that was passed in and set the state to the new array of songs
+    };
+
     return (
         <div className="container">
             <Header />
-            <Songs songs={songs} />
+            {songs.length > 0 ? <Songs songs={songs} onDelete={deleteSong} /> : "No songs to show"}
         </div>
     );
 }
