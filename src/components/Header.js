@@ -1,9 +1,15 @@
 import PropTypes from "prop-types";
+import Button from "./Button";
+import Songs from "./Songs";
 
 const Header = ({ title }) => {
+    const onClick = () => {
+        console.log("Click");
+    };
     return (
-        <header>
+        <header className="header">
             <h1>{title}</h1>
+            <Button color="green" text="Add" onClick={onClick} />
         </header>
     );
 };
@@ -15,4 +21,10 @@ Header.propTypes = {
 Header.defaultProps = {
     title: "Music Store",
 };
+
+// CSS in JS
+// const headingStyle = {
+//     color: "red",
+//     backgroundColor: "yellow",
+// };
 export default Header;
