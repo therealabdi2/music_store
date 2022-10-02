@@ -96,8 +96,8 @@ body {
     cursor: pointer;
 }
 
-.song.reminder {
-    border-left: 5px solid green;
+.song.favourite {
+    border: 5px solid green;
 }
 
 .song h3 {
