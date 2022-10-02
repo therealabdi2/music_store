@@ -4,6 +4,8 @@ import Songs from "./components/Songs";
 import AddSong from "./components/AddSong";
 
 function App() {
+    const [showAddSong, setShowAddSong] = useState(false);
+
     const [songs, setSongs] = useState([
         {
             id: 1,
@@ -67,8 +69,8 @@ function App() {
 
     return (
         <div className="container">
-            <Header />
-            <AddSong onAdd={addSong} />
+            <Header onAdd={() => setShowAddSong(!showAddSong)} showAdd={showAddSong} />
+            {showAddSong && <AddSong onAdd={addSong} />}
             {songs.length > 0 ? <Songs songs={songs} onDelete={deleteSong} onToggle={toggleFavorite} /> : "No songs to show"}
         </div>
     );
