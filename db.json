@@ -14,7 +14,7 @@
       "artist": "TLC",
       "genre": "R&B",
       "rating": 5,
-      "favourite": false
+      "favourite": true
     },
     {
       "id": 3,
@@ -30,7 +30,7 @@
       "artist": "Smash Mouth",
       "genre": "Rock",
       "rating": 2,
-      "favourite": true
+      "favourite": false
     },
     {
       "id": 5,
@@ -38,7 +38,7 @@
       "artist": "Backstreet",
       "genre": "Pop",
       "rating": 1,
-      "favourite": true
+      "favourite": false
     }
   ]
 }
