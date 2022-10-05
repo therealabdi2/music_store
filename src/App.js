@@ -18,7 +18,7 @@ function App() {
             setSongs(songsFromServer);
         };
         getSongs();
-    }, []);
+    }, [songs]);
 
     const fetchSongs = async () => {
         const res = await fetch("http://localhost:5000/songs");
@@ -69,7 +69,6 @@ function App() {
             body: JSON.stringify(updatedSong),
         });
         const data = await res.json();
-        console.log("data", data);
 
         setSongs(songs.map((song) => (song.id === id ? { ...song, favourite: !data.favourite } : song)));
     };
