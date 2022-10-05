@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Songs from "./components/Songs";
 import AddSong from "./components/AddSong";
-
+import Footer from "./components/Footer";
+import About from "./components/About";
+import Navbar from "./components/Navbar";
+import Home from "./components/pages/Home";
 function App() {
     const [showAddSong, setShowAddSong] = useState(false);
 
@@ -30,28 +34,18 @@ function App() {
 
     // Add Song
     const addSong = async (song) => {
+        const rating = Math.floor(Math.random() * 5) + 1;
+
         const res = await fetch("http://localhost:5000/songs", {
             method: "POST",
             headers: {
                 "Content-type": "application/json",
             },
-            body: JSON.stringify(song),
+            body: JSON.stringify({ ...song, rating }),
         });
 
         const data = await res.json();
-        console.log("data", data);
-
-        const rating = Math.floor(Math.random() * 5) + 1;
-
-        // add rating and favourite and update the song object
-
-        const newSong = { ...data, rating };
-        setSongs([...songs, newSong]);
-
-        // const id = Math.floor(Math.random() * 10000) + 1;
-        // const rating = Math.floor(Math.random() * 5) + 1;
-        // const newSong = { id, ...song, rating, favourite };
-        // setSongs([...songs, newSong]);
+        setSongs([...songs, data]);
     };
     // Delete song
     const deleteSong = async (id) => {
@@ -81,11 +75,26 @@ function App() {
     };
 
     return (
-        <div className="container">
-            <Header onAdd={() => setShowAddSong(!showAddSong)} showAdd={showAddSong} />
-            {showAddSong && <AddSong onAdd={addSong} />}
-            {songs.length > 0 ? <Songs songs={songs} onDelete={deleteSong} onToggle={toggleFavorite} /> : "No songs to show"}
-        </div>
+        <Router>
+            <div className="">
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                </Routes>
+                <Routes>
+                    <Route path="/about" element={<About />} />
+                </Routes>
+                <div style={{ display: "flex" }}>
+                    <div className="">
+                        <Header onAdd={() => setShowAddSong(!showAddSong)} showAdd={showAddSong} />
+                        {showAddSong && <AddSong onAdd={addSong} />}
+                    </div>
+
+                    <div className="container">{songs.length > 0 ? <Songs songs={songs} onDelete={deleteSong} onToggle={toggleFavorite} /> : <p style={{ color: "white" }}>No songs to show</p>}</div>
+                </div>
+                <Footer />
+            </div>
+        </Router>
     );
 }
 

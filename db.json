@@ -6,7 +6,7 @@
       "artist": "Tame Impala",
       "genre": "Rock",
       "rating": 4,
-      "favourite": true
+      "favourite": false
     },
     {
       "id": 2,
@@ -14,7 +14,7 @@
       "artist": "TLC",
       "genre": "R&B",
       "rating": 5,
-      "favourite": false
+      "favourite": true
     },
     {
       "id": 3,
@@ -22,7 +22,7 @@
       "artist": "Los Del Rio",
       "genre": "Latin",
       "rating": 3,
-      "favourite": false
+      "favourite": true
     },
     {
       "id": 4,

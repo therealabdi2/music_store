@@ -48,7 +48,7 @@ body {
     max-width: 66vh;
     margin: 1px auto;
     overflow: auto;
-    min-height: 300px;
+    max-height: 200px;
     border: 1px solid steelblue;
     padding: 1px;
     border-radius: 5px;
@@ -96,8 +96,9 @@ body {
     cursor: pointer;
 }
 
-.song.favourite {
+.favourite {
     border: 5px solid green;
+    background-color: green;
 }
 
 .song h3 {
