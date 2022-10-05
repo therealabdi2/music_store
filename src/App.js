@@ -7,10 +7,14 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import Navbar from "./components/Navbar";
 import Home from "./components/pages/Home";
+import SongList from "./components/song-list/song-list.component";
+import { fetchSongs, fetchSong } from "./services/api";
+
 function App() {
     const [showAddSong, setShowAddSong] = useState(false);
 
     const [songs, setSongs] = useState([]);
+    const [filteredSongs, setFilteredSongs] = useState([]);
 
     useEffect(() => {
         const getSongs = async () => {
@@ -18,19 +22,7 @@ function App() {
             setSongs(songsFromServer);
         };
         getSongs();
-    }, [songs]);
-
-    const fetchSongs = async () => {
-        const res = await fetch("http://localhost:5000/songs");
-        const data = await res.json();
-        return data;
-    };
-
-    const fetchSong = async (id) => {
-        const res = await fetch(`http://localhost:5000/songs/${id}`);
-        const data = await res.json();
-        return data;
-    };
+    }, []);
 
     // Add Song
     const addSong = async (song) => {
@@ -73,9 +65,18 @@ function App() {
         setSongs(songs.map((song) => (song.id === id ? { ...song, favourite: !data.favourite } : song)));
     };
 
+    const onSearchChange = (event) => {
+        const searchField = event.target.value.toLowerCase();
+        const allSongs = songs;
+        const filteredSongsList = allSongs.filter((song) => {
+            return song.title.toLowerCase().includes(searchField);
+        });
+        setFilteredSongs(filteredSongsList);
+    };
+
     return (
         <Router>
-            <div className="">
+            <div>
                 <Navbar />
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -83,6 +84,7 @@ function App() {
                 <Routes>
                     <Route path="/about" element={<About />} />
                 </Routes>
+
                 <div style={{ display: "flex" }}>
                     <div className="">
                         <Header onAdd={() => setShowAddSong(!showAddSong)} showAdd={showAddSong} />
@@ -91,6 +93,8 @@ function App() {
 
                     <div className="container">{songs.length > 0 ? <Songs songs={songs} onDelete={deleteSong} onToggle={toggleFavorite} /> : <p style={{ color: "white" }}>No songs to show</p>}</div>
                 </div>
+                <input className="search-box" placeholder="search songs" onChange={onSearchChange} />
+                <SongList songs={filteredSongs} />
                 <Footer />
             </div>
         </Router>

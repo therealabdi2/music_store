@@ -14,7 +14,7 @@
       "artist": "TLC",
       "genre": "R&B",
       "rating": 5,
-      "favourite": true
+      "favourite": false
     },
     {
       "id": 3,
