@@ -30,7 +30,7 @@
       "artist": "Smash Mouth",
       "genre": "Rock",
       "rating": 2,
-      "favourite": false
+      "favourite": true
     },
     {
       "id": 5,

@@ -23,7 +23,7 @@ function App() {
       setSongs(songsFromServer);
     };
     getSongs();
-  }, [songs]);
+  }, [filteredSongs]);
 
   // Add Song
   const addSong = async (song) => {
@@ -121,7 +121,7 @@ function App() {
         <SearchBox
           onChangeHandler={onSearchChange}
           placeholder="search songs"
-          className="search-box"
+          className="songs-search-box"
         />
 
         <SongList songs={filteredSongs} />
