@@ -14,8 +14,8 @@ import { fetchSongs, fetchSong } from "./services/api";
 function App() {
   const [showAddSong, setShowAddSong] = useState(false);
 
+  const [searchField, setSearchField] = useState("");
   const [songs, setSongs] = useState([]);
-  const [filteredSongs, setFilteredSongs] = useState([]);
 
   useEffect(() => {
     const getSongs = async () => {
@@ -23,7 +23,7 @@ function App() {
       setSongs(songsFromServer);
     };
     getSongs();
-  }, [filteredSongs]);
+  }, []);
 
   // Add Song
   const addSong = async (song) => {
@@ -71,13 +71,13 @@ function App() {
   };
 
   const onSearchChange = (event) => {
-    const searchField = event.target.value.toLowerCase();
-    const allSongs = songs;
-    const filteredSongsList = allSongs.filter((song) => {
-      return song.title.toLowerCase().includes(searchField);
-    });
-    setFilteredSongs(filteredSongsList);
+    const searchFieldString = event.target.value.toLowerCase();
+    setSearchField(searchFieldString);
   };
+
+  const filteredSongs = songs.filter((song) =>
+    song.title.toLowerCase().includes(searchField)
+  );
 
   return (
     <Router>
@@ -108,7 +108,7 @@ function App() {
           <div className="container">
             {songs.length > 0 ? (
               <Songs
-                songs={songs}
+                songs={filteredSongs}
                 onDelete={deleteSong}
                 onToggle={toggleFavorite}
               />
